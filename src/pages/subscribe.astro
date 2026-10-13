@@ -1,0 +1,267 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const pageTitle = "Subscribe";
+---
+
+<Layout title={pageTitle}>
+	<div class="page-header">
+		<h1>{pageTitle}</h1>
+		<p class="text-secondary">Stay updated with my Astro journey</p>
+	</div>
+	
+	<div class="page-content">
+		<div class="card subscribe-card">
+			<div class="card-content">
+				<h2>Subscribe to My Newsletter</h2>
+				<p>Join my mailing list to receive updates about my Astro learning journey, new blog posts, and web development tips.</p>
+				
+				<form 
+					id="subscribe-form" 
+					class="subscribe-form"
+					action="https://formsubmit.co/mihaioan.mrc@gmail.com" 
+					method="POST"
+				>
+					<input type="hidden" name="_subject" value="New Subscription - Astro Site" />
+					<input type="hidden" name="_next" value="/subscribe/success" />
+					<input type="hidden" name="_captcha" value="false" />
+					
+					<div class="form-group">
+						<label for="name" class="field-label">Full Name</label>
+						<input 
+							type="text" 
+							id="name" 
+							name="name" 
+							class="field-input" 
+							placeholder="Enter your full name" 
+							required
+						/>
+					</div>
+					
+					<div class="form-group">
+						<label for="email" class="field-label">Email Address</label>
+						<input 
+							type="email" 
+							id="email" 
+							name="email" 
+							class="field-input" 
+							placeholder="Enter your email address" 
+							required
+						/>
+					</div>
+					
+					<div class="form-group">
+						<label for="interests" class="field-label">Interests (Optional)</label>
+						<textarea 
+							id="interests" 
+							name="interests" 
+							class="field-textarea" 
+							placeholder="What topics interest you? (Astro, web development, etc.)"
+							rows="4"
+						></textarea>
+					</div>
+					
+					<div class="form-actions">
+						<button type="submit" class="button">
+							Subscribe Now
+						</button>
+						<button type="reset" class="button button-outline">
+							Clear Form
+						</button>
+					</div>
+					
+					<div id="form-message" class="form-message" role="alert" aria-live="polite"></div>
+				</form>
+			</div>
+		</div>
+		
+		<div class="mt-2xl text-center">
+			<a href="/" class="button button-outline">Back to Home</a>
+		</div>
+	</div>
+</Layout>
+
+<style>
+	.page-content {
+		max-width: 600px;
+		margin: 0 auto;
+		padding: 0 1rem;
+	}
+	
+	.page-header {
+		padding-top: 2rem;
+	}
+	
+	.subscribe-card {
+		margin-top: 2rem;
+	}
+	
+	.subscribe-card h2 {
+		margin-bottom: 1rem;
+		color: var(--text-primary);
+		font-size: var(--font-size-2xl);
+	}
+	
+	.subscribe-card p {
+		color: var(--text-secondary);
+		margin-bottom: 2rem;
+		line-height: 1.6;
+	}
+	
+	.subscribe-form {
+		width: 100%;
+	}
+	
+	.form-group {
+		margin-bottom: 1.5rem;
+	}
+	
+	.field-label {
+		display: block;
+		margin-bottom: 0.5rem;
+		font-size: var(--font-size-sm);
+		font-weight: var(--font-weight-medium);
+		color: var(--text-primary);
+	}
+	
+	.field-input,
+	.field-textarea {
+		width: 100%;
+		padding: 0.75rem 1rem;
+		font-family: inherit;
+		font-size: var(--font-size-base);
+		line-height: 1.5;
+		color: var(--text-primary);
+		background-color: var(--bg-primary);
+		border: 1px solid var(--border-medium);
+		border-radius: var(--radius-lg);
+		transition: all var(--transition-fast);
+	}
+	
+	.field-input:focus,
+	.field-textarea:focus {
+		outline: none;
+		border-color: var(--color-primary-500);
+		box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+	}
+	
+	.field-input:hover:not(:focus),
+	.field-textarea:hover:not(:focus) {
+		border-color: var(--border-dark);
+	}
+	
+	.field-input::placeholder,
+	.field-textarea::placeholder {
+		color: var(--color-neutral-400);
+	}
+	
+	.field-textarea {
+		min-height: 100px;
+		resize: vertical;
+	}
+	
+	.form-actions {
+		display: flex;
+		gap: 1rem;
+		margin-top: 0.5rem;
+		flex-wrap: wrap;
+	}
+	
+	.form-actions .button {
+		flex: 1;
+		min-width: 150px;
+	}
+	
+	.form-message {
+		margin-top: 1rem;
+		padding: 1rem;
+		border-radius: var(--radius-lg);
+		font-size: var(--font-size-sm);
+	}
+	
+	.form-message.success {
+		background-color: var(--color-secondary-50);
+		color: var(--color-secondary-800);
+		border: 1px solid var(--color-secondary-200);
+	}
+	
+	.form-message.error {
+		background-color: #fee2e2;
+		color: #991b1b;
+		border: 1px solid #fecaca;
+	}
+	
+	.form-message::before {
+		content: '';
+		display: inline-block;
+		width: 16px;
+		height: 16px;
+		margin-right: 0.5rem;
+		vertical-align: middle;
+	}
+	
+	.form-message.success::before {
+		background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2322c55e' stroke-width='2'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E") center/contain no-repeat;
+	}
+	
+	.form-message.error::before {
+		background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ef4444' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M15 9l-6 6'/%3E%3Cpath d='M9 9l6 6'/%3E%3C/svg%3E") center/contain no-repeat;
+	}
+	
+	@media screen and (max-width: 767px) {
+		.form-actions {
+			flex-direction: column;
+		}
+		
+		.form-actions .button {
+			min-width: 100%;
+		}
+	}
+</style>
+
+<script>
+	// Client-side form submission handling for better UX
+	const form = document.getElementById('subscribe-form');
+	const messageEl = document.getElementById('form-message');
+	
+	if (form && messageEl) {
+		form.addEventListener('submit', async (e) => {
+			messageEl.textContent = '';
+			messageEl.className = 'form-message';
+			
+			try {
+				// FormSubmit will handle the submission, but we can add a loading state
+				const submitBtn = form.querySelector('button[type="submit"]');
+				const originalText = submitBtn?.textContent;
+				
+				if (submitBtn) {
+					submitBtn.textContent = 'Sending...';
+					submitBtn.disabled = true;
+				}
+				
+				// Submit the form normally
+				// FormSubmit will redirect to _next URL on success
+				
+			} catch (error) {
+				// If there's an error before submission
+				messageEl.textContent = 'An error occurred. Please try again.';
+				messageEl.className = 'form-message error';
+				
+				const submitBtn = form.querySelector('button[type="submit"]');
+				if (submitBtn) {
+					submitBtn.textContent = 'Subscribe Now';
+					submitBtn.disabled = false;
+				}
+			}
+		});
+		
+		// Reset button handler
+		const resetBtn = form.querySelector('button[type="reset"]');
+		if (resetBtn) {
+			resetBtn.addEventListener('click', () => {
+				messageEl.textContent = '';
+				messageEl.className = 'form-message';
+			});
+		}
+	}
+</script>

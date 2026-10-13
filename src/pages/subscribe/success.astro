@@ -1,0 +1,85 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Subscription Successful">
+	<div class="page-header">
+		<h1>Thank You for Subscribing!</h1>
+		<p class="text-secondary">Your subscription has been received</p>
+	</div>
+	
+	<div class="page-content">
+		<div class="card success-card">
+			<div class="card-content text-center">
+				<div class="success-icon">
+					<svg width="64" height="64" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+						<path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+					</svg>
+				</div>
+				
+				<h2>Subscription Confirmed</h2>
+				<p>Thank you for subscribing to my newsletter! You will receive updates about my Astro learning journey and web development tips.</p>
+				
+				<div class="mt-xl">
+					<a href="/" class="button">Return to Home</a>
+					<a href="/blog/" class="button button-outline ml-md">Visit Blog</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</Layout>
+
+<style>
+	.page-content {
+		max-width: 600px;
+		margin: 0 auto;
+		padding: 2rem 1rem;
+	}
+	
+	.page-header {
+		padding-top: 2rem;
+	}
+	
+	.success-card {
+		margin-top: 2rem;
+	}
+	
+	.success-icon {
+		width: 80px;
+		height: 80px;
+		margin: 0 auto 1.5rem;
+		background: var(--color-secondary-100);
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	
+	.success-icon svg {
+		width: 48px;
+		height: 48px;
+		color: var(--color-secondary-600);
+	}
+	
+	.success-card h2 {
+		margin-bottom: 1rem;
+		color: var(--text-primary);
+		font-size: var(--font-size-2xl);
+	}
+	
+	.success-card p {
+		color: var(--text-secondary);
+		line-height: 1.6;
+		margin-bottom: 2rem;
+	}
+	
+	@media screen and (max-width: 767px) {
+		.success-card .button {
+			margin-bottom: 1rem;
+		}
+		
+		.success-card .ml-md {
+			margin-left: 0 !important;
+		}
+	}
+</style>
