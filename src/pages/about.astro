@@ -1,22 +1,93 @@
 ---
+import Layout from '../layouts/Layout.astro';
+
+const pageTitle = "About Me";
+
+const identity = {
+  firstName: "Mihai",
+  country: "Romania",
+  occupation: "Technical Writer",
+  hobbies: ["photography", "birdwatching", "baseball"],
+};
+
+const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Writing Docs"];
 ---
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Astro</title>
-  </head>
-  <body>
-    <a href="/">Home</a>
-    <br>
-    <a href="/about/">About</a>
-    <br>
-    <a href="/blog/">Blog</a>
-    <h1>About Me</h1>
-    <h2>... and my new Astro site!</h2>
 
-    <p>I am working through Astro's introductory tutorial. This is the second page on my website, and it's the first one I built myself!</p>
+<Layout title={pageTitle}>
+	<div class="page-header">
+		<h1>{pageTitle}</h1>
+		<p class="text-secondary">Learn more about me and my journey with Astro</p>
+	</div>
+	
+	<div class="about-intro">
+		<p>I am working through Astro's introductory tutorial. This is the second page on my website, and it's the first one I built myself!</p>
+		<p>This site will update as I complete more of the tutorial, so keep checking back and see how my journey is going!</p>
+		<p>Here are a few facts about me:</p>
+	</div>
 
-    <p>This site will update as I complete more of the tutorial, so keep checking back and see how my journey is going!</p>
-  </body>
-</html>
+	<div class="grid md:grid-cols-2 gap-xl">
+		<div>
+			<h2>About Me</h2>
+			<ul>
+				<li>My name is {identity.firstName}.</li>
+				<li>I live in {identity.country} and I work as a {identity.occupation}.</li>
+				{identity.hobbies.length >= 2 &&
+					<li>Two of my hobbies are: {identity.hobbies[0]} and {identity.hobbies[1]}</li>
+				}
+			</ul>
+		</div>
+		
+		<div>
+			<h2>My Skills</h2>
+			<ul class="skills-list">
+				{skills.map((skill) => <li>{skill}</li>)}
+			</ul>
+		</div>
+	</div>
+	
+	<div class="mt-2xl">
+		<a href="/" class="button">Back to Home</a>
+	</div>
+</Layout>
+
+<style>
+	.about-intro {
+		font-size: 1.125rem;
+		color: var(--text-secondary);
+		max-width: 80ch;
+		line-height: 1.75;
+		margin-bottom: 2rem;
+	}
+	
+	.about-intro p {
+		margin-bottom: 1rem;
+	}
+	
+	.skills-list {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+		gap: 1rem;
+	}
+	
+	.skills-list li {
+		padding: 1rem;
+		background: var(--bg-tertiary);
+		border-radius: var(--radius-lg);
+		text-align: center;
+		font-weight: var(--font-weight-medium);
+		color: var(--text-primary);
+		transition: all var(--transition-fast);
+	}
+	
+	.skills-list li:hover {
+		background: var(--color-primary-50);
+		color: var(--color-primary-700);
+		transform: translateY(-2px);
+	}
+	
+	@media screen and (min-width: 768px) {
+		.about-intro {
+			font-size: 1.25rem;
+		}
+	}
+</style>

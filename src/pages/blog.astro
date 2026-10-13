@@ -1,24 +1,149 @@
 ---
----
-<html lang="en">
-  <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width" />
-    <title>Astro</title>
-  </head>
-  <body>
-    <a href="/">Home</a>
-    <br>
-    <a href="/about/">About</a>
-    <br>
-    <a href="/blog/">Blog</a>
+import Layout from '../layouts/Layout.astro';
 
-    <h1>My Astro Learning Blog</h1>
-    <p>This is where I will post about my journey learning Astro.</p>
-    <ul>
-      <li><a href="/posts/post-1/">Post 1</a></li>
-      <li><a href="/posts/post-2/">Post 2</a></li>
-      <li><a href="/posts/post-3/">Post 3</a></li>
-    </ul>
-  </body>
-</html>
+const pageTitle = "Blog";
+const allPosts = Object.values(import.meta.glob('./posts/*.md', { eager: true }));
+---
+
+<Layout title={pageTitle}>
+	<div class="page-header">
+		<h1>My Astro Learning Blog</h1>
+		<p class="text-secondary">This is where I will post about my journey learning Astro.</p>
+	</div>
+
+	<div class="blog-posts">
+		<ul class="blog-post-list">
+			{allPosts
+				.sort((a: any, b: any) => {
+					const dateA = new Date(a.frontmatter.pubDate);
+					const dateB = new Date(b.frontmatter.pubDate);
+					return dateB.getTime() - dateA.getTime();
+				})
+				.map((post: any) => (
+					<li class="blog-post-item">
+						<article>
+							<h2 class="blog-post-title">
+								<a href={post.url}>{post.frontmatter.title}</a>
+							</h2>
+							<div class="blog-post-meta">
+								<span class="blog-post-date">
+									{new Date(post.frontmatter.pubDate).toLocaleDateString('en-US', {
+										year: 'numeric',
+										month: 'long',
+										day: 'numeric',
+									})}
+								</span>
+								<span class="blog-post-author">by {post.frontmatter.author}</span>
+							</div>
+							<p class="blog-post-excerpt">{post.frontmatter.description}</p>
+							<div class="blog-post-tags">
+								{post.frontmatter.tags?.map((tag: string) => (
+									<span class="tag">{tag}</span>
+								))}
+							</div>
+							<a href={post.url} class="button button-outline mt-md">
+								Read more &rarr;
+							</a>
+						</article>
+					</li>
+				))}
+		</ul>
+	</div>
+	
+	<div class="mt-2xl text-center">
+		<a href="/" class="button">Back to Home</a>
+	</div>
+</Layout>
+
+<style>
+	.blog-posts {
+		margin: 2rem 0;
+	}
+	
+	.blog-post-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	
+	.blog-post-item {
+		margin-bottom: 2rem;
+		padding: 1.5rem;
+		background: var(--bg-primary);
+		border: 1px solid var(--border-light);
+		border-radius: var(--radius-xl);
+		transition: all var(--transition-normal);
+		box-shadow: var(--shadow-sm);
+	}
+	
+	.blog-post-item:hover {
+		box-shadow: var(--shadow-md);
+		border-color: var(--border-medium);
+		transform: translateY(-2px);
+	}
+	
+	.blog-post-title {
+		margin: 0 0 0.75rem;
+		font-size: 1.5rem;
+	}
+	
+	.blog-post-title a {
+		font-weight: var(--font-weight-bold);
+		color: var(--text-primary);
+		transition: color var(--transition-fast);
+	}
+	
+	.blog-post-title a:hover {
+		color: var(--color-primary-600);
+	}
+	
+	.blog-post-meta {
+		display: flex;
+		gap: 1rem;
+		font-size: 0.875rem;
+		color: var(--text-tertiary);
+		margin-bottom: 1rem;
+		flex-wrap: wrap;
+	}
+	
+	.blog-post-excerpt {
+		color: var(--text-secondary);
+		line-height: 1.75;
+		margin: 0 0 1rem;
+	}
+	
+	.blog-post-tags {
+		display: flex;
+		gap: 0.5rem;
+		flex-wrap: wrap;
+	}
+	
+	.tag {
+		padding: 0.25rem 0.75rem;
+		background: var(--color-primary-100);
+		color: var(--color-primary-700);
+		border-radius: var(--radius-full);
+		font-size: 0.75rem;
+		font-weight: var(--font-weight-medium);
+		transition: all var(--transition-fast);
+	}
+	
+	.tag:hover {
+		background: var(--color-primary-200);
+		color: var(--color-primary-800);
+	}
+	
+	@media screen and (min-width: 768px) {
+		.blog-post-item {
+			padding: 2rem;
+		}
+		
+		.blog-post-title {
+			font-size: 1.75rem;
+		}
+		
+		.blog-post-tags {
+			margin-top: 1rem;
+		}
+	}
+</style>

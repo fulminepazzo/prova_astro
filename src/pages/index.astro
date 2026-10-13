@@ -2,15 +2,139 @@
 import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const pageTitle = "Home Page";
 ---
-<a href="/">Home</a>
-<br>
-<a href="/about/">About</a>
-<br>
-<a href="/blog/">Blog</a>
 
-<Layout>
-	<Welcome />
+<Layout title={pageTitle}>
+	<div class="welcome-section">
+		<Welcome />
+	</div>
+	
+	<div class="home-content">
+		<h2>Welcome to My Astro Site</h2>
+		<p>This is my first website built with Astro. I'm learning how to create fast, modern websites with this amazing framework.</p>
+		<p>Explore the different sections to learn more about my journey:</p>
+		
+		<div class="feature-grid">
+			<div class="feature-card card">
+				<div class="card-content">
+					<h3>Home</h3>
+					<p>Return to the main page of my Astro site to see the welcome message and latest updates.</p>
+					<a href="/" class="button">Visit Home</a>
+				</div>
+			</div>
+			
+			<div class="feature-card card">
+				<div class="card-content">
+					<h3>About Me</h3>
+					<p>Learn about who I am and what I do. Discover my hobbies, skills, and background.</p>
+					<a href="/about/" class="button">Visit About Page</a>
+				</div>
+			</div>
+			
+			<div class="feature-card card">
+				<div class="card-content">
+					<h3>Blog</h3>
+					<p>Read my latest posts about learning Astro and web development in general.</p>
+					<a href="/blog/" class="button">Visit Blog</a>
+				</div>
+			</div>
+			
+			<div class="feature-card card">
+				<div class="card-content">
+					<h3>Documentation</h3>
+					<p>Check out the official Astro documentation to learn more about the framework.</p>
+					<a href="https://docs.astro.build" class="button">View Docs</a>
+				</div>
+			</div>
+		</div>
+	</div>
 </Layout>
+
+<style>
+	.welcome-section {
+		margin-bottom: 3rem;
+		padding: 2rem 0;
+		border-bottom: 1px solid var(--border-light);
+	}
+	
+	.home-content {
+		max-width: 80ch;
+		margin: 0 auto;
+		padding: 0 1rem;
+	}
+	
+	.home-content h2 {
+		text-align: center;
+		margin-bottom: 1rem;
+		color: var(--text-primary);
+	}
+	
+	.home-content p {
+		text-align: center;
+		color: var(--text-secondary);
+		max-width: 60ch;
+		margin: 0 auto 2rem;
+	}
+	
+	.feature-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 1.5rem;
+		margin-top: 2rem;
+	}
+	
+	.feature-card {
+		padding: 0;
+		text-align: left;
+		transition: all var(--transition-normal);
+	}
+	
+	.feature-card:hover {
+		transform: translateY(-4px);
+		box-shadow: var(--shadow-lg);
+	}
+	
+	.card-content {
+		padding: 1.5rem;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+	
+	.feature-card h3 {
+		margin: 0;
+		font-size: var(--font-size-xl);
+		font-weight: var(--font-weight-semibold);
+		color: var(--text-primary);
+	}
+	
+	.feature-card p {
+		margin: 0;
+		color: var(--text-secondary);
+		line-height: 1.6;
+		flex: 1;
+	}
+	
+	.feature-card .button {
+		width: 100%;
+		margin-top: auto;
+	}
+	
+	@media screen and (min-width: 768px) {
+		.feature-grid {
+			grid-template-columns: repeat(4, 1fr);
+		}
+		
+		.home-content p {
+			font-size: 1.125rem;
+		}
+	}
+	
+	@media screen and (max-width: 767px) {
+		.feature-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+</style>
