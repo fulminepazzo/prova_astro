@@ -1,29 +1,16 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 
 const pageTitle = "Home Page";
 ---
 
 <Layout title={pageTitle}>
-	<div class="welcome-section">
-		<Welcome />
-	</div>
-	
 	<div class="home-content">
 		<h2>Welcome to My Astro Site</h2>
 		<p>This is my first website built with Astro. I'm learning how to create fast, modern websites with this amazing framework.</p>
 		<p>Explore the different sections to learn more about my journey:</p>
 		
 		<div class="feature-grid">
-			<div class="feature-card card">
-				<div class="card-content">
-					<h3>Home</h3>
-					<p>Return to the main page of my Astro site to see the welcome message and latest updates.</p>
-					<a href="/" class="button">Visit Home</a>
-				</div>
-			</div>
-			
 			<div class="feature-card card">
 				<div class="card-content">
 					<h3>About Me</h3>
@@ -52,16 +39,10 @@ const pageTitle = "Home Page";
 </Layout>
 
 <style>
-	.welcome-section {
-		margin-bottom: 3rem;
-		padding: 2rem 0;
-		border-bottom: 1px solid var(--border-light);
-	}
-	
 	.home-content {
 		max-width: 80ch;
 		margin: 0 auto;
-		padding: 0 1rem;
+		padding: 2rem 1rem 0;
 	}
 	
 	.home-content h2 {
@@ -124,17 +105,11 @@ const pageTitle = "Home Page";
 	
 	@media screen and (min-width: 768px) {
 		.feature-grid {
-			grid-template-columns: repeat(4, 1fr);
+			grid-template-columns: repeat(3, 1fr);
 		}
 		
 		.home-content p {
 			font-size: 1.125rem;
-		}
-	}
-	
-	@media screen and (max-width: 767px) {
-		.feature-grid {
-			grid-template-columns: repeat(2, 1fr);
 		}
 	}
 </style>
